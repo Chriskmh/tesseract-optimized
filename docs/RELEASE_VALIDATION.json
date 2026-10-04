@@ -1,0 +1,18 @@
+{
+  "build": {
+    "passed": true,
+    "jobs": 1,
+    "targets": [
+      "//benchmarks/scripts:original_worker",
+      "//benchmarks/scripts:optimized_worker",
+      "//benchmarks/scripts:input_export",
+      "//src:tesseract"
+    ]
+  },
+  "decoder_source": "Retained CPU/GPU decoder source matches the previous validated release byte for byte.",
+  "gpu_imports": "All 27 runtime modules imported successfully without constructing a decoder.",
+  "evidence": "All six 50000-shot totals, compact block timing/count records, per-shot failure bits and circuit hashes verified.",
+  "additional_decoding": false,
+  "bulk_inputs": "Not distributed in Git or Release attachments; regenerate from circuits and seeds.",
+  "cmake": "Development test targets and their dependency fetch removed; production definitions retained. Not rebuilt in this release audit."
+}

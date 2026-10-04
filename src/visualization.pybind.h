@@ -1,0 +1,20 @@
+#include <pybind11/iostream.h>
+#include <pybind11/numpy.h>
+#include <pybind11/operators.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
+#include "visualization.h"
+
+namespace py = pybind11;
+
+namespace tesseract_decoder {
+
+void add_visualization_module(py::module& root) {
+  auto m = root.def_submodule("viz", "Module containing the visualization tools");
+  py::class_<tesseract_decoder::Visualizer>(m, "Visualizer")
+      .def(py::init<>())
+      .def("write", &tesseract_decoder::Visualizer::write, py::arg("fpath"));
+}
+
+}  // namespace tesseract_decoder

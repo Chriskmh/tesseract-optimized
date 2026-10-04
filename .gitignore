@@ -1,0 +1,10 @@
+.venv*/
+__pycache__/
+*.pyc
+bazel-*
+build*/
+.cupy_cache/
+outputs/
+benchmarks/scripts/bin/
+benchmarks/scripts/results_*/
+benchmarks/inputs/*/

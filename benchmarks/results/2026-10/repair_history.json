@@ -1,0 +1,11 @@
+{
+  "description": "BB GPU run paused at 9000 shots after a host detection-buffer capacity error. Allocation planning was changed from aligned chunks to all sliding windows. Decoder code, inputs and search parameters were unchanged. Completed blocks were retained and the incomplete block rerun.",
+  "inference": "Times sum successful completed blocks; repair downtime and failed-attempt overhead are excluded.",
+  "repair": {
+    "reason": "aligned detection bound too small for offset formal blocks",
+    "change": "bound all contiguous chunk windows in benchmark allocation planner",
+    "completed_bb_gpu_shots_retained": 9000,
+    "algorithm_changed": false,
+    "inputs_changed": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "generator_commit": "5b128149a087d63c6394c670c44b6f1e3fb38a21",
+  "circuits": [
+    {
+      "family": "bb",
+      "circuit": "benchmarks/circuits/bb.stim",
+      "sha256": "1865c049d8414c9644eb85b5ff4e6d1c12858261d9ac62ee60ef885c8e64832e",
+      "p": 0.001,
+      "rounds": 18
+    },
+    {
+      "family": "color",
+      "circuit": "benchmarks/circuits/color.stim",
+      "sha256": "22dc07439682db680b1459b54de6db903ebb7776d7ce6de5f1ed4c2755964edd",
+      "p": 0.001,
+      "rounds": 19
+    }
+  ]
+}

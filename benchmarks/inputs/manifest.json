@@ -1,0 +1,84 @@
+{
+  "bb": {
+    "identity": {
+      "circuit_sha256": "1865c049d8414c9644eb85b5ff4e6d1c12858261d9ac62ee60ef885c8e64832e",
+      "shots": 50064,
+      "seed": 202610100,
+      "beam": 5,
+      "budget": 100000,
+      "exporter_sha256": "fb1640172115ead45199d06cb605611764a8042406754edad89a85375a6ba46f"
+    },
+    "sha256": {
+      "shot_offsets.u64": "487fa88005d36e1733fe6033f9f03485866b58ba18e42cfd66aaaa93f8422ea4",
+      "shot_detections.u32": "40a9d092ce22a40e1f0114c96b9e3dbba6dde39fc954c0768df8813f8ca5cc0c",
+      "truth_offsets.u64": "29e67b529813aa3203a0ce252c040180874a8c3a6c9729f0f83245da51d96986",
+      "truth_observables.u32": "d9bf356742f8826f5e082981096b7460761a53848342e9f9ae5ca87b362d2d66"
+    },
+    "metadata": {
+      "beam": 5,
+      "circuit": "benchmarks/circuits/bb.stim",
+      "cpu_reference_seconds": 0.0,
+      "det_penalty": 0.0,
+      "detector_orders": 1,
+      "eneighbor_word_groups": 3506388,
+      "eneighbors": 62397504,
+      "format": 1,
+      "incidences": 1201104,
+      "merge_errors": true,
+      "no_revisit_dets": true,
+      "num_detectors": 5184,
+      "num_errors": 206496,
+      "num_observables": 12,
+      "pqlimit": 100000,
+      "rank_groups": 22,
+      "rank_maximum": 85,
+      "rank_rows_monotonic": true,
+      "rank_safe": true,
+      "rank_storage_bits": 16,
+      "rank_stride": 17,
+      "seed": 202610100,
+      "shots": 50064
+    }
+  },
+  "color": {
+    "identity": {
+      "circuit_sha256": "22dc07439682db680b1459b54de6db903ebb7776d7ce6de5f1ed4c2755964edd",
+      "shots": 50064,
+      "seed": 202610101,
+      "beam": 5,
+      "budget": 100000,
+      "exporter_sha256": "fb1640172115ead45199d06cb605611764a8042406754edad89a85375a6ba46f"
+    },
+    "sha256": {
+      "shot_offsets.u64": "e5a445ca1064953fcdb41f0cd2c34cf87759567f9a4936bd19cb39b4c5b5c18b",
+      "shot_detections.u32": "d76f859c853148f1dbe44cd83d2b7a9867502ec0d4523232ff5aadf6a4a66a16",
+      "truth_offsets.u64": "9303a8e1564108814a332e1710d086f62451e4e3629784b6c2d501571f0ceb25",
+      "truth_observables.u32": "f232ff7edaf8dc706144e209e1a8ac6e70cf43b2296c2ab7adb3fb27e1c1d044"
+    },
+    "metadata": {
+      "beam": 5,
+      "circuit": "benchmarks/circuits/color.stim",
+      "cpu_reference_seconds": 0.0,
+      "det_penalty": 0.0,
+      "detector_orders": 1,
+      "eneighbor_word_groups": 1802259,
+      "eneighbors": 19127342,
+      "format": 1,
+      "incidences": 1194450,
+      "merge_errors": true,
+      "no_revisit_dets": true,
+      "num_detectors": 5130,
+      "num_errors": 240848,
+      "num_observables": 1,
+      "pqlimit": 100000,
+      "rank_groups": 108,
+      "rank_maximum": 249,
+      "rank_rows_monotonic": true,
+      "rank_safe": true,
+      "rank_storage_bits": 16,
+      "rank_stride": 17,
+      "seed": 202610101,
+      "shots": 50064
+    }
+  }
+}

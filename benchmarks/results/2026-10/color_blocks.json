@@ -1,0 +1,1358 @@
+{
+  "original": [
+    {
+      "begin": 0,
+      "count": 1000,
+      "wall_seconds": 387.1458569999668,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 49,
+      "failure_count": 25
+    },
+    {
+      "begin": 1000,
+      "count": 1000,
+      "wall_seconds": 374.7021740000346,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 42,
+      "failure_count": 24
+    },
+    {
+      "begin": 2000,
+      "count": 1000,
+      "wall_seconds": 382.9173787999898,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 48,
+      "failure_count": 24
+    },
+    {
+      "begin": 3000,
+      "count": 1000,
+      "wall_seconds": 387.02851589996135,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 40,
+      "failure_count": 18
+    },
+    {
+      "begin": 4000,
+      "count": 1000,
+      "wall_seconds": 383.13371199998073,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 23
+    },
+    {
+      "begin": 5000,
+      "count": 1000,
+      "wall_seconds": 393.24020790000213,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 58,
+      "failure_count": 32
+    },
+    {
+      "begin": 6000,
+      "count": 1000,
+      "wall_seconds": 403.6855116999941,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 61,
+      "failure_count": 27
+    },
+    {
+      "begin": 7000,
+      "count": 1000,
+      "wall_seconds": 397.97262479999335,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 49,
+      "failure_count": 30
+    },
+    {
+      "begin": 8000,
+      "count": 1000,
+      "wall_seconds": 369.8057926999754,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 36,
+      "failure_count": 18
+    },
+    {
+      "begin": 9000,
+      "count": 1000,
+      "wall_seconds": 402.687070999993,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 60,
+      "failure_count": 27
+    },
+    {
+      "begin": 10000,
+      "count": 1000,
+      "wall_seconds": 376.4623650999856,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 16
+    },
+    {
+      "begin": 11000,
+      "count": 1000,
+      "wall_seconds": 373.3217848999775,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 20
+    },
+    {
+      "begin": 12000,
+      "count": 1000,
+      "wall_seconds": 383.76479000004474,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 52,
+      "failure_count": 17
+    },
+    {
+      "begin": 13000,
+      "count": 1000,
+      "wall_seconds": 383.18069739994826,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 51,
+      "failure_count": 20
+    },
+    {
+      "begin": 14000,
+      "count": 1000,
+      "wall_seconds": 399.8965141000226,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 65,
+      "failure_count": 35
+    },
+    {
+      "begin": 15000,
+      "count": 1000,
+      "wall_seconds": 385.40159540000604,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 59,
+      "failure_count": 24
+    },
+    {
+      "begin": 16000,
+      "count": 1000,
+      "wall_seconds": 395.5956986999954,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 56,
+      "failure_count": 27
+    },
+    {
+      "begin": 17000,
+      "count": 1000,
+      "wall_seconds": 398.18383729999186,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 54,
+      "failure_count": 23
+    },
+    {
+      "begin": 18000,
+      "count": 1000,
+      "wall_seconds": 383.88165850000223,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 22
+    },
+    {
+      "begin": 19000,
+      "count": 1000,
+      "wall_seconds": 403.4963004000019,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 58,
+      "failure_count": 31
+    },
+    {
+      "begin": 20000,
+      "count": 1000,
+      "wall_seconds": 391.0329239999992,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 58,
+      "failure_count": 31
+    },
+    {
+      "begin": 21000,
+      "count": 1000,
+      "wall_seconds": 411.98416630004067,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 52,
+      "failure_count": 29
+    },
+    {
+      "begin": 22000,
+      "count": 1000,
+      "wall_seconds": 398.73366279999027,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 58,
+      "failure_count": 30
+    },
+    {
+      "begin": 23000,
+      "count": 1000,
+      "wall_seconds": 397.8095896000159,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 56,
+      "failure_count": 37
+    },
+    {
+      "begin": 24000,
+      "count": 1000,
+      "wall_seconds": 393.3822535999934,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 51,
+      "failure_count": 21
+    },
+    {
+      "begin": 25000,
+      "count": 1000,
+      "wall_seconds": 387.0609760999796,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 52,
+      "failure_count": 24
+    },
+    {
+      "begin": 26000,
+      "count": 1000,
+      "wall_seconds": 374.9886564000044,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 24
+    },
+    {
+      "begin": 27000,
+      "count": 1000,
+      "wall_seconds": 380.9955348999938,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 38,
+      "failure_count": 15
+    },
+    {
+      "begin": 28000,
+      "count": 1000,
+      "wall_seconds": 404.142345500004,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 57,
+      "failure_count": 27
+    },
+    {
+      "begin": 29000,
+      "count": 1000,
+      "wall_seconds": 385.9423314000014,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 53,
+      "failure_count": 18
+    },
+    {
+      "begin": 30000,
+      "count": 1000,
+      "wall_seconds": 399.65821819996927,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 64,
+      "failure_count": 27
+    },
+    {
+      "begin": 31000,
+      "count": 1000,
+      "wall_seconds": 402.6656452000025,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 54,
+      "failure_count": 24
+    },
+    {
+      "begin": 32000,
+      "count": 1000,
+      "wall_seconds": 385.59271309996257,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 43,
+      "failure_count": 22
+    },
+    {
+      "begin": 33000,
+      "count": 1000,
+      "wall_seconds": 391.7303718000185,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 57,
+      "failure_count": 29
+    },
+    {
+      "begin": 34000,
+      "count": 1000,
+      "wall_seconds": 391.32648269995116,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 30
+    },
+    {
+      "begin": 35000,
+      "count": 1000,
+      "wall_seconds": 403.4316416999791,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 53,
+      "failure_count": 31
+    },
+    {
+      "begin": 36000,
+      "count": 1000,
+      "wall_seconds": 412.7912878000061,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 64,
+      "failure_count": 33
+    },
+    {
+      "begin": 37000,
+      "count": 1000,
+      "wall_seconds": 397.1784354999545,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 55,
+      "failure_count": 34
+    },
+    {
+      "begin": 38000,
+      "count": 1000,
+      "wall_seconds": 391.76273829996353,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 51,
+      "failure_count": 21
+    },
+    {
+      "begin": 39000,
+      "count": 1000,
+      "wall_seconds": 394.89961050002603,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 54,
+      "failure_count": 26
+    },
+    {
+      "begin": 40000,
+      "count": 1000,
+      "wall_seconds": 393.12876539997524,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 55,
+      "failure_count": 28
+    },
+    {
+      "begin": 41000,
+      "count": 1000,
+      "wall_seconds": 386.1995222999831,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 59,
+      "failure_count": 25
+    },
+    {
+      "begin": 42000,
+      "count": 1000,
+      "wall_seconds": 400.12186410004506,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 52,
+      "failure_count": 26
+    },
+    {
+      "begin": 43000,
+      "count": 1000,
+      "wall_seconds": 391.91695420001633,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 47,
+      "failure_count": 24
+    },
+    {
+      "begin": 44000,
+      "count": 1000,
+      "wall_seconds": 385.88967850001063,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 47,
+      "failure_count": 19
+    },
+    {
+      "begin": 45000,
+      "count": 1000,
+      "wall_seconds": 397.42557699995814,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 59,
+      "failure_count": 28
+    },
+    {
+      "begin": 46000,
+      "count": 1000,
+      "wall_seconds": 387.29611940000905,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 43,
+      "failure_count": 18
+    },
+    {
+      "begin": 47000,
+      "count": 1000,
+      "wall_seconds": 401.67214009998133,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 61,
+      "failure_count": 30
+    },
+    {
+      "begin": 48000,
+      "count": 1000,
+      "wall_seconds": 385.74230099999113,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 49,
+      "failure_count": 22
+    },
+    {
+      "begin": 49000,
+      "count": 1000,
+      "wall_seconds": 395.8045599000179,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 54,
+      "failure_count": 28
+    }
+  ],
+  "optimized": [
+    {
+      "begin": 0,
+      "count": 1000,
+      "wall_seconds": 128.14937290002126,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 49,
+      "failure_count": 25
+    },
+    {
+      "begin": 1000,
+      "count": 1000,
+      "wall_seconds": 125.93490629998269,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 42,
+      "failure_count": 24
+    },
+    {
+      "begin": 2000,
+      "count": 1000,
+      "wall_seconds": 127.48240779998014,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 48,
+      "failure_count": 24
+    },
+    {
+      "begin": 3000,
+      "count": 1000,
+      "wall_seconds": 128.48347470001318,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 40,
+      "failure_count": 18
+    },
+    {
+      "begin": 4000,
+      "count": 1000,
+      "wall_seconds": 127.72932019998552,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 23
+    },
+    {
+      "begin": 5000,
+      "count": 1000,
+      "wall_seconds": 129.4337059999816,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 58,
+      "failure_count": 32
+    },
+    {
+      "begin": 6000,
+      "count": 1000,
+      "wall_seconds": 131.949274100014,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 61,
+      "failure_count": 27
+    },
+    {
+      "begin": 7000,
+      "count": 1000,
+      "wall_seconds": 131.00538250000682,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 49,
+      "failure_count": 30
+    },
+    {
+      "begin": 8000,
+      "count": 1000,
+      "wall_seconds": 124.39438599999994,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 36,
+      "failure_count": 18
+    },
+    {
+      "begin": 9000,
+      "count": 1000,
+      "wall_seconds": 131.75258740002755,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 60,
+      "failure_count": 27
+    },
+    {
+      "begin": 10000,
+      "count": 1000,
+      "wall_seconds": 126.51064930000575,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 16
+    },
+    {
+      "begin": 11000,
+      "count": 1000,
+      "wall_seconds": 125.26692369999364,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 20
+    },
+    {
+      "begin": 12000,
+      "count": 1000,
+      "wall_seconds": 126.94285230000969,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 52,
+      "failure_count": 17
+    },
+    {
+      "begin": 13000,
+      "count": 1000,
+      "wall_seconds": 127.87548099999549,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 51,
+      "failure_count": 20
+    },
+    {
+      "begin": 14000,
+      "count": 1000,
+      "wall_seconds": 131.51429010002175,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 65,
+      "failure_count": 35
+    },
+    {
+      "begin": 15000,
+      "count": 1000,
+      "wall_seconds": 127.56021239998518,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 59,
+      "failure_count": 24
+    },
+    {
+      "begin": 16000,
+      "count": 1000,
+      "wall_seconds": 130.71542099997168,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 56,
+      "failure_count": 27
+    },
+    {
+      "begin": 17000,
+      "count": 1000,
+      "wall_seconds": 131.25295270001516,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 54,
+      "failure_count": 23
+    },
+    {
+      "begin": 18000,
+      "count": 1000,
+      "wall_seconds": 127.87110569997458,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 22
+    },
+    {
+      "begin": 19000,
+      "count": 1000,
+      "wall_seconds": 132.07202620001044,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 58,
+      "failure_count": 31
+    },
+    {
+      "begin": 20000,
+      "count": 1000,
+      "wall_seconds": 128.67854690004606,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 58,
+      "failure_count": 31
+    },
+    {
+      "begin": 21000,
+      "count": 1000,
+      "wall_seconds": 134.59021149994805,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 52,
+      "failure_count": 29
+    },
+    {
+      "begin": 22000,
+      "count": 1000,
+      "wall_seconds": 130.80011789995478,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 58,
+      "failure_count": 30
+    },
+    {
+      "begin": 23000,
+      "count": 1000,
+      "wall_seconds": 129.42677870002808,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 56,
+      "failure_count": 37
+    },
+    {
+      "begin": 24000,
+      "count": 1000,
+      "wall_seconds": 129.5012798999669,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 51,
+      "failure_count": 21
+    },
+    {
+      "begin": 25000,
+      "count": 1000,
+      "wall_seconds": 128.1664045000216,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 52,
+      "failure_count": 24
+    },
+    {
+      "begin": 26000,
+      "count": 1000,
+      "wall_seconds": 125.25955380004598,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 24
+    },
+    {
+      "begin": 27000,
+      "count": 1000,
+      "wall_seconds": 126.88308739999775,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 38,
+      "failure_count": 15
+    },
+    {
+      "begin": 28000,
+      "count": 1000,
+      "wall_seconds": 132.25248500000453,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 57,
+      "failure_count": 27
+    },
+    {
+      "begin": 29000,
+      "count": 1000,
+      "wall_seconds": 128.25562660000287,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 53,
+      "failure_count": 18
+    },
+    {
+      "begin": 30000,
+      "count": 1000,
+      "wall_seconds": 131.46923420001986,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 64,
+      "failure_count": 27
+    },
+    {
+      "begin": 31000,
+      "count": 1000,
+      "wall_seconds": 132.2220834000036,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 54,
+      "failure_count": 24
+    },
+    {
+      "begin": 32000,
+      "count": 1000,
+      "wall_seconds": 127.57039920001989,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 43,
+      "failure_count": 22
+    },
+    {
+      "begin": 33000,
+      "count": 1000,
+      "wall_seconds": 129.9261789000011,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 57,
+      "failure_count": 29
+    },
+    {
+      "begin": 34000,
+      "count": 1000,
+      "wall_seconds": 128.88980400003493,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 45,
+      "failure_count": 30
+    },
+    {
+      "begin": 35000,
+      "count": 1000,
+      "wall_seconds": 133.20123539998895,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 53,
+      "failure_count": 31
+    },
+    {
+      "begin": 36000,
+      "count": 1000,
+      "wall_seconds": 134.24405770003796,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 64,
+      "failure_count": 33
+    },
+    {
+      "begin": 37000,
+      "count": 1000,
+      "wall_seconds": 130.41318860003958,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 55,
+      "failure_count": 34
+    },
+    {
+      "begin": 38000,
+      "count": 1000,
+      "wall_seconds": 128.75752629997442,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 51,
+      "failure_count": 21
+    },
+    {
+      "begin": 39000,
+      "count": 1000,
+      "wall_seconds": 128.98967049998464,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 54,
+      "failure_count": 26
+    },
+    {
+      "begin": 40000,
+      "count": 1000,
+      "wall_seconds": 129.6300022000214,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 55,
+      "failure_count": 28
+    },
+    {
+      "begin": 41000,
+      "count": 1000,
+      "wall_seconds": 127.55353110004216,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 59,
+      "failure_count": 25
+    },
+    {
+      "begin": 42000,
+      "count": 1000,
+      "wall_seconds": 130.85789599997224,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 52,
+      "failure_count": 26
+    },
+    {
+      "begin": 43000,
+      "count": 1000,
+      "wall_seconds": 127.80149879999226,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 47,
+      "failure_count": 24
+    },
+    {
+      "begin": 44000,
+      "count": 1000,
+      "wall_seconds": 127.55062580003869,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 47,
+      "failure_count": 19
+    },
+    {
+      "begin": 45000,
+      "count": 1000,
+      "wall_seconds": 130.8599780999939,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 59,
+      "failure_count": 28
+    },
+    {
+      "begin": 46000,
+      "count": 1000,
+      "wall_seconds": 128.20726970001124,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 43,
+      "failure_count": 18
+    },
+    {
+      "begin": 47000,
+      "count": 1000,
+      "wall_seconds": 131.83931299997494,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 61,
+      "failure_count": 30
+    },
+    {
+      "begin": 48000,
+      "count": 1000,
+      "wall_seconds": 127.83693210000638,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 49,
+      "failure_count": 22
+    },
+    {
+      "begin": 49000,
+      "count": 1000,
+      "wall_seconds": 130.2320317000267,
+      "fallbacks": 0,
+      "gpu_accepted": 0,
+      "flag_count": 54,
+      "failure_count": 28
+    }
+  ],
+  "gpu": [
+    {
+      "begin": 0,
+      "count": 1000,
+      "wall_seconds": 66.34666889999062,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 49,
+      "failure_count": 25
+    },
+    {
+      "begin": 1000,
+      "count": 1000,
+      "wall_seconds": 65.40781840001,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 42,
+      "failure_count": 24
+    },
+    {
+      "begin": 2000,
+      "count": 1000,
+      "wall_seconds": 66.77875969995512,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 48,
+      "failure_count": 24
+    },
+    {
+      "begin": 3000,
+      "count": 1000,
+      "wall_seconds": 66.99103579996154,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 40,
+      "failure_count": 18
+    },
+    {
+      "begin": 4000,
+      "count": 1000,
+      "wall_seconds": 65.94080539996503,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 45,
+      "failure_count": 23
+    },
+    {
+      "begin": 5000,
+      "count": 1000,
+      "wall_seconds": 66.8541018999531,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 58,
+      "failure_count": 32
+    },
+    {
+      "begin": 6000,
+      "count": 1000,
+      "wall_seconds": 68.80335240002023,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 61,
+      "failure_count": 27
+    },
+    {
+      "begin": 7000,
+      "count": 1000,
+      "wall_seconds": 68.28060309996363,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 49,
+      "failure_count": 30
+    },
+    {
+      "begin": 8000,
+      "count": 1000,
+      "wall_seconds": 64.752615699952,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 36,
+      "failure_count": 18
+    },
+    {
+      "begin": 9000,
+      "count": 1000,
+      "wall_seconds": 68.51463580003474,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 60,
+      "failure_count": 27
+    },
+    {
+      "begin": 10000,
+      "count": 1000,
+      "wall_seconds": 65.40345260000322,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 45,
+      "failure_count": 16
+    },
+    {
+      "begin": 11000,
+      "count": 1000,
+      "wall_seconds": 65.50916700001108,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 45,
+      "failure_count": 20
+    },
+    {
+      "begin": 12000,
+      "count": 1000,
+      "wall_seconds": 66.76728160004131,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 52,
+      "failure_count": 17
+    },
+    {
+      "begin": 13000,
+      "count": 1000,
+      "wall_seconds": 66.23352619999787,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 51,
+      "failure_count": 20
+    },
+    {
+      "begin": 14000,
+      "count": 1000,
+      "wall_seconds": 68.94660409999778,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 65,
+      "failure_count": 35
+    },
+    {
+      "begin": 15000,
+      "count": 1000,
+      "wall_seconds": 67.14185300003737,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 59,
+      "failure_count": 24
+    },
+    {
+      "begin": 16000,
+      "count": 1000,
+      "wall_seconds": 69.35540860000765,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 56,
+      "failure_count": 27
+    },
+    {
+      "begin": 17000,
+      "count": 1000,
+      "wall_seconds": 67.98724149999907,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 54,
+      "failure_count": 23
+    },
+    {
+      "begin": 18000,
+      "count": 1000,
+      "wall_seconds": 66.1160592000233,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 45,
+      "failure_count": 22
+    },
+    {
+      "begin": 19000,
+      "count": 1000,
+      "wall_seconds": 68.82098509999923,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 58,
+      "failure_count": 31
+    },
+    {
+      "begin": 20000,
+      "count": 1000,
+      "wall_seconds": 66.3597842999734,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 58,
+      "failure_count": 31
+    },
+    {
+      "begin": 21000,
+      "count": 1000,
+      "wall_seconds": 69.57356229994912,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 52,
+      "failure_count": 29
+    },
+    {
+      "begin": 22000,
+      "count": 1000,
+      "wall_seconds": 67.43227419996401,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 58,
+      "failure_count": 30
+    },
+    {
+      "begin": 23000,
+      "count": 1000,
+      "wall_seconds": 67.50793359999079,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 56,
+      "failure_count": 37
+    },
+    {
+      "begin": 24000,
+      "count": 1000,
+      "wall_seconds": 67.02051970001776,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 51,
+      "failure_count": 21
+    },
+    {
+      "begin": 25000,
+      "count": 1000,
+      "wall_seconds": 66.53072310000425,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 52,
+      "failure_count": 24
+    },
+    {
+      "begin": 26000,
+      "count": 1000,
+      "wall_seconds": 65.51441760000307,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 45,
+      "failure_count": 24
+    },
+    {
+      "begin": 27000,
+      "count": 1000,
+      "wall_seconds": 65.64644470001804,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 38,
+      "failure_count": 15
+    },
+    {
+      "begin": 28000,
+      "count": 1000,
+      "wall_seconds": 68.72507129999576,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 57,
+      "failure_count": 27
+    },
+    {
+      "begin": 29000,
+      "count": 1000,
+      "wall_seconds": 66.60457189998124,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 53,
+      "failure_count": 18
+    },
+    {
+      "begin": 30000,
+      "count": 1000,
+      "wall_seconds": 68.35120410000673,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 64,
+      "failure_count": 27
+    },
+    {
+      "begin": 31000,
+      "count": 1000,
+      "wall_seconds": 68.62562260002596,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 54,
+      "failure_count": 24
+    },
+    {
+      "begin": 32000,
+      "count": 1000,
+      "wall_seconds": 66.75387139996747,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 43,
+      "failure_count": 22
+    },
+    {
+      "begin": 33000,
+      "count": 1000,
+      "wall_seconds": 66.37959349999437,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 57,
+      "failure_count": 29
+    },
+    {
+      "begin": 34000,
+      "count": 1000,
+      "wall_seconds": 66.67273769999156,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 45,
+      "failure_count": 30
+    },
+    {
+      "begin": 35000,
+      "count": 1000,
+      "wall_seconds": 68.77727759996196,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 53,
+      "failure_count": 31
+    },
+    {
+      "begin": 36000,
+      "count": 1000,
+      "wall_seconds": 70.15706019999925,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 64,
+      "failure_count": 33
+    },
+    {
+      "begin": 37000,
+      "count": 1000,
+      "wall_seconds": 68.10321779997321,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 55,
+      "failure_count": 34
+    },
+    {
+      "begin": 38000,
+      "count": 1000,
+      "wall_seconds": 66.72323269996559,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 51,
+      "failure_count": 21
+    },
+    {
+      "begin": 39000,
+      "count": 1000,
+      "wall_seconds": 66.31276899995282,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 54,
+      "failure_count": 26
+    },
+    {
+      "begin": 40000,
+      "count": 1000,
+      "wall_seconds": 67.04371540003922,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 55,
+      "failure_count": 28
+    },
+    {
+      "begin": 41000,
+      "count": 1000,
+      "wall_seconds": 66.69614549999824,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 59,
+      "failure_count": 25
+    },
+    {
+      "begin": 42000,
+      "count": 1000,
+      "wall_seconds": 67.45245320000686,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 52,
+      "failure_count": 26
+    },
+    {
+      "begin": 43000,
+      "count": 1000,
+      "wall_seconds": 66.4026519000181,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 47,
+      "failure_count": 24
+    },
+    {
+      "begin": 44000,
+      "count": 1000,
+      "wall_seconds": 66.08298859995557,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 47,
+      "failure_count": 19
+    },
+    {
+      "begin": 45000,
+      "count": 1000,
+      "wall_seconds": 67.10342880000826,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 59,
+      "failure_count": 28
+    },
+    {
+      "begin": 46000,
+      "count": 1000,
+      "wall_seconds": 67.20867229998112,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 43,
+      "failure_count": 18
+    },
+    {
+      "begin": 47000,
+      "count": 1000,
+      "wall_seconds": 68.59844229998998,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 61,
+      "failure_count": 30
+    },
+    {
+      "begin": 48000,
+      "count": 1000,
+      "wall_seconds": 65.90345319994958,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 49,
+      "failure_count": 22
+    },
+    {
+      "begin": 49000,
+      "count": 1000,
+      "wall_seconds": 67.953441700025,
+      "fallbacks": 0,
+      "gpu_accepted": 1000,
+      "flag_count": 54,
+      "failure_count": 28
+    }
+  ]
+}

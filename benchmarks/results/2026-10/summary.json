@@ -1,0 +1,248 @@
+{
+  "bb": {
+    "code": "[[288,12,18]]",
+    "circuit": "benchmarks/circuits/bb.stim",
+    "p": 0.001,
+    "rounds": 18,
+    "noise": "SI1000",
+    "basis": "X",
+    "beam": 5,
+    "pqlimit": 100000,
+    "warmup_shots": 64,
+    "modes": {
+      "original": {
+        "shots": 50000,
+        "errors": 20,
+        "ler": 0.0004,
+        "ler_wilson95": [
+          0.00025896487722254513,
+          0.0006177969383031394
+        ],
+        "flags": 20,
+        "fallbacks": 0,
+        "wall_seconds": 17267.04724509979,
+        "shots_per_second": 2.8956890712272463,
+        "completed": "2026-10-01T14:39:24.726542+00:00",
+        "setup": {
+          "wall_seconds": 34.133048699994106,
+          "cpu": {
+            "ready": true,
+            "setup_seconds": 12.678653908
+          },
+          "gpu_plan": null,
+          "warmup_shots": 64,
+          "budget": 100000,
+          "beam": 5,
+          "mode": "original"
+        },
+        "average_seconds_per_shot": 0.34534094490199585
+      },
+      "optimized": {
+        "shots": 50000,
+        "errors": 20,
+        "ler": 0.0004,
+        "ler_wilson95": [
+          0.00025896487722254513,
+          0.0006177969383031394
+        ],
+        "flags": 20,
+        "fallbacks": 0,
+        "wall_seconds": 6042.376025100006,
+        "shots_per_second": 8.274890505374078,
+        "completed": "2026-10-01T16:20:18.248358+00:00",
+        "setup": {
+          "wall_seconds": 10.175134500022978,
+          "cpu": {
+            "ready": true,
+            "setup_seconds": 2.354844735
+          },
+          "gpu_plan": null,
+          "warmup_shots": 64,
+          "budget": 100000,
+          "beam": 5,
+          "mode": "optimized"
+        },
+        "average_seconds_per_shot": 0.12084752050200012
+      },
+      "gpu": {
+        "shots": 50000,
+        "errors": 20,
+        "ler": 0.0004,
+        "ler_wilson95": [
+          0.00025896487722254513,
+          0.0006177969383031394
+        ],
+        "flags": 20,
+        "fallbacks": 0,
+        "wall_seconds": 3443.6149469999364,
+        "shots_per_second": 14.519625675210813,
+        "completed": "2026-10-01T09:51:02.299482+00:00",
+        "setup": {
+          "wall_seconds": 46.30227450001985,
+          "cpu": {
+            "ready": true,
+            "setup_seconds": 2.428934774
+          },
+          "gpu_plan": {
+            "backend": "prefetch",
+            "workspace_capacity": 100000,
+            "cta_threads": 640,
+            "heap_cache": 1024,
+            "stamp_layout": null,
+            "source_shots": 50064,
+            "chunk_size": 64,
+            "detection_capacity": 20475,
+            "free_bytes": 5383389184,
+            "total_bytes": 6442123264,
+            "usable_bytes": 4037541888,
+            "graph_bytes": 65641700,
+            "chunk_input_bytes": 124916,
+            "workspace_bytes": 490757136,
+            "estimated_device_bytes": 556523752,
+            "memory_info_error": null,
+            "source": "memGetInfo",
+            "workspace_layout": "bb-singlehash-compact",
+            "implementation_module": "cta_compact_fused_rank32_nodebug_csr32_singlehash_restrict_hot_compactvisited_cta640_decoder"
+          },
+          "warmup_shots": 64,
+          "budget": 100000,
+          "beam": 5,
+          "mode": "gpu"
+        },
+        "average_seconds_per_shot": 0.06887229893999873
+      }
+    },
+    "shot_failure_disagreements": {
+      "optimized": 0,
+      "gpu": 0
+    },
+    "speedups": {
+      "optimized": 2.857658506086438,
+      "gpu": 5.014221250300581
+    },
+    "gpu_vs_optimized": 1.754660761466406
+  },
+  "color": {
+    "code": "superdense [[271,1,19]]",
+    "circuit": "benchmarks/circuits/color.stim",
+    "p": 0.001,
+    "rounds": 19,
+    "noise": "SI1000",
+    "basis": "X",
+    "beam": 5,
+    "pqlimit": 100000,
+    "warmup_shots": 64,
+    "modes": {
+      "original": {
+        "shots": 50000,
+        "errors": 1264,
+        "ler": 0.02528,
+        "ler_wilson95": [
+          0.02394012427444721,
+          0.026692814814957017
+        ],
+        "flags": 2604,
+        "fallbacks": 0,
+        "wall_seconds": 19587.81115489971,
+        "shots_per_second": 2.5526078235389233,
+        "completed": "2026-10-01T22:44:11.627150+00:00",
+        "setup": {
+          "wall_seconds": 31.224312300037127,
+          "cpu": {
+            "ready": true,
+            "setup_seconds": 7.673353969
+          },
+          "gpu_plan": null,
+          "warmup_shots": 64,
+          "budget": 100000,
+          "beam": 5,
+          "mode": "original"
+        },
+        "average_seconds_per_shot": 0.39175622309799424
+      },
+      "optimized": {
+        "shots": 50000,
+        "errors": 1264,
+        "ler": 0.02528,
+        "ler_wilson95": [
+          0.02394012427444721,
+          0.026692814814957017
+        ],
+        "flags": 2604,
+        "fallbacks": 0,
+        "wall_seconds": 6465.7632812001975,
+        "shots_per_second": 7.733039059035707,
+        "completed": "2026-10-02T00:32:08.192368+00:00",
+        "setup": {
+          "wall_seconds": 10.083574699994642,
+          "cpu": {
+            "ready": true,
+            "setup_seconds": 2.102241782
+          },
+          "gpu_plan": null,
+          "warmup_shots": 64,
+          "budget": 100000,
+          "beam": 5,
+          "mode": "optimized"
+        },
+        "average_seconds_per_shot": 0.12931526562400394
+      },
+      "gpu": {
+        "shots": 50000,
+        "errors": 1264,
+        "ler": 0.02528,
+        "ler_wilson95": [
+          0.02394012427444721,
+          0.026692814814957017
+        ],
+        "flags": 2604,
+        "fallbacks": 0,
+        "wall_seconds": 3359.169258199632,
+        "shots_per_second": 14.884632525720901,
+        "completed": "2026-10-01T17:17:11.743891+00:00",
+        "setup": {
+          "wall_seconds": 41.7954383000033,
+          "cpu": {
+            "ready": true,
+            "setup_seconds": 2.20481462
+          },
+          "gpu_plan": {
+            "backend": "final",
+            "workspace_capacity": 100000,
+            "cta_threads": 256,
+            "heap_cache": 128,
+            "stamp_layout": null,
+            "source_shots": 50064,
+            "chunk_size": 256,
+            "detection_capacity": 79587,
+            "free_bytes": 5381292032,
+            "total_bytes": 6442123264,
+            "usable_bytes": 4035969024,
+            "graph_bytes": 46637764,
+            "chunk_input_bytes": 490388,
+            "workspace_bytes": 3142301696,
+            "estimated_device_bytes": 3189429848,
+            "memory_info_error": null,
+            "source": "memGetInfo",
+            "workspace_layout": "legacy",
+            "implementation_module": "cta_compact_wide_decoder"
+          },
+          "warmup_shots": 64,
+          "budget": 100000,
+          "beam": 5,
+          "mode": "gpu"
+        },
+        "average_seconds_per_shot": 0.06718338516399264
+      }
+    },
+    "shot_failure_disagreements": {
+      "optimized": 0,
+      "gpu": 0
+    },
+    "speedups": {
+      "optimized": 3.0294661748370957,
+      "gpu": 5.831147420477979
+    },
+    "gpu_vs_optimized": 1.9248102087792873
+  }
+}

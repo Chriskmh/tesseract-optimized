@@ -1,0 +1,8 @@
+# Note: if you add or subtract from the list below, also update the "allow"
+# list in ../../.github/dependabot.yaml.
+
+stim
+pytest
+sinter
+pybind11-stubgen
+jupytext

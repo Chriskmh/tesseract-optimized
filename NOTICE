@@ -1,0 +1,6 @@
+This project is derived from quantumlib/tesseract-decoder (Google LLC, Apache-2.0).
+Original notices and LICENSE are retained. CPU algorithm and CUDA backend
+changes are supplied in this research release. CUDA variants are separate from
+the upstream package. Superdense Color circuits were generated with the official
+quantumlib/chromobius generator; generator commit is recorded in circuits.json.
+Historical benchmark provenance is supplied for attribution and reproducibility.

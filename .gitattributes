@@ -1,0 +1,2 @@
+# Preserve recorded source and evidence bytes across platforms for SHA256 checks.
+* -text
