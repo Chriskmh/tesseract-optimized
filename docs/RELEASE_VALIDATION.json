@@ -1,4 +1,6 @@
 {
+  "scope": "Historical compact-release audit at d675b56f41ca21e28a2163606d85ba855598df52. Subsequent GPU resource-policy validation is recorded separately.",
+  "subsequent_gpu_resources": "GPU_RESOURCE_VALIDATION.json",
   "build": {
     "passed": true,
     "jobs": 1,

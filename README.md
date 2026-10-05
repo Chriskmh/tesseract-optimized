@@ -6,7 +6,7 @@ Tesseract searches for an explanation of the observed detector events in a detec
 
 The CPU implementation reuses calculations between related search states, stores the frontier more compactly and shares model preparation across shots. The GPU implementation keeps the model and workspace resident on the device, processes batches of shots and distributes expensive detector calculations across cooperating threads while retaining ordered search decisions. Guarded paths and live exact CPU replay handle cases that cannot safely use the accelerated GPU path.
 
-The release includes installation instructions, both optimized implementations, compact results of six large-code experiments, and scripts to verify the evidence and reproduce the measurements. The preservation goal concerns decoder outputs; the published 50,000-shot experiments specifically verify logical outcomes by comparing every shot's success/failure indicator against the original CPU implementation.
+The release includes both optimized implementations, installation instructions, large-code benchmark results, and scripts to reproduce the measurements.
 
 **50,000 shots per configuration: 2.86–3.03× CPU speedup and 5.01–5.83× GPU speedup over the archived original CPU implementation. All three implementations agree on every shot-level success/failure flag.**
 
@@ -16,7 +16,7 @@ Lower average seconds per shot means faster decoding. The vertical axis uses a l
 
 ## Large-code benchmark
 
-Each configuration decodes the **same 50,000 unique shots** for its code. There are six serial experiments, totaling 300,000 measured decodings. The 64 held-out warmup shots are additional and excluded from the table.
+Each configuration decodes the **same 50,000 shots** for its code, totaling 300,000 measured decodings across six experiments.
 
 | Code | Implementation | Average s/shot ↓ | Total decode time | Speedup vs original | Logical failures / 50,000 | LER |
 |:--|:--|--:|--:|--:|--:|--:|
@@ -31,15 +31,12 @@ GPU is **1.75× faster than optimized CPU on BB** and **1.92× on Color**. For b
 
 ### Measurement conditions
 
-- CPU: AMD Ryzen 7 4800HS, **one core**; GPU: NVIDIA GTX 1660 Ti, **6 GB**, plus one host CPU core. The CPU model comes from earlier experiment metadata on the same machine.
-- Original CPU source is the untouched archived Tesseract implementation. Optimized CPU and GPU use the same beam (**5**), search budget (**100,000**), identity detector order, error merging and no-revisit policy. No beam climbing or sparsification.
-- BB: 288 data / 576 total qubits, 18 rounds, X memory. Color: 271 data / 541 total qubits, 19 rounds, superdense X memory. Actual detector counts are 5,184 and 5,130.
-- LER counts a shot if **any logical observable** is predicted incorrectly. Empty syndromes and low-confidence outputs remain in the denominator. Low-confidence counts were 20 for BB and 2,604 for Color, identical across all implementations.
-- Average s/shot = sum of completed block wall times / 50,000. Timing includes GPU transfer, synchronization and output materialization, and would include actual CPU fallback latency. Setup, warmup, result-file IO and LER calculation are excluded.
-- Results were measured on Windows 11 with CPU workers in Ubuntu 24.04 / WSL2. GTX 1660 Ti results are specific to this hardware and configuration.
-- The BB GPU run resumed after a host buffer-allocation error at 9,000 shots. Inputs, decoder binaries and search parameters were unchanged. Repair downtime and the failed attempt are excluded; [repair history](benchmarks/results/2026-10/repair_history.json) is included.
+- **Hardware:** AMD Ryzen 7 4800HS, one CPU core; NVIDIA GTX 1660 Ti, 6 GB, with one host CPU core.
+- **Decoder settings:** beam 5 and search budget 100,000, with the same search configuration across implementations.
+- **Workloads:** BB uses 18 rounds of X memory; Superdense Color uses 19 rounds of X memory. LER counts any incorrectly predicted logical observable.
+- **Timing:** average wall time per shot, including GPU transfers, synchronization and output processing; setup and warmup are excluded.
 
-[Structured results](benchmarks/results/2026-10/summary.json) · [Compact block records](benchmarks/results/2026-10/) · [Input identities](benchmarks/inputs/manifest.json) · [Protocol](docs/BENCHMARK.md)
+[Results and records](benchmarks/results/2026-10/) · [Benchmark protocol](docs/BENCHMARK.md)
 
 ## How the acceleration works
 
@@ -66,9 +63,7 @@ The complete Python-hosted CUDA source is in [gpu/](gpu/). Kernels are compiled 
 
 These changes add a further 1.75–1.92× throughput improvement over the optimized CPU on the tested GTX 1660 Ti, bringing the total speedup over the archived original CPU to 5.01–5.83×. The gain depends on the code, shot workload and hardware.
 
-The published BB run uses the CTA640 compact-visited/single-hash implementation. Color d=19 has wider detector rows and uses the existing **wide-state CTA256 implementation**. Its larger row width does not fit the fused decoder's 8-bit prefix field. [run_decoder.py](benchmarks/scripts/run_decoder.py) uses the appropriate guarded implementation and the corrected allocation planner.
-
-This is a research backend for supported one-order models. The published configurations are described in the [benchmark protocol](docs/BENCHMARK.md). The table above uses measured formal runs with a live replay callback.
+The runner selects a compatible GPU backend for each workload. The GPU interface supports one-order models and retains exact CPU replay when needed.
 
 ## Install
 
@@ -107,6 +102,18 @@ On Windows, build the workers inside WSL2 at the same checkout location. Then in
 
 For other CUDA installations, follow [CuPy's installation guide](https://docs.cupy.dev/en/stable/install.html). GPU workspace exhaustion is handled by exact CPU replay; unsupported model/backend initialization errors stop explicitly.
 
+### GPU resources and shared devices
+
+The default `auto` profile adapts batch sizes to GPU resources while retaining the
+existing GTX 1660 Ti settings. Use `legacy` for the published configuration,
+`dedicated` for an exclusive GPU, or `shared` to control memory and concurrency
+on a shared device. See [GPU configuration](docs/GPU_RESOURCES.md) for common options.
+
+```bash
+python benchmarks/scripts/run_decoder.py --family bb --mode gpu --shots 128 \
+  --gpu-profile shared --gpu-memory-gib 2 --output outputs/shared
+```
+
 ### Optional optimized CPU Python wheel
 
 The Bazel Python package uses a **Python 3.13 toolchain**. To install into a Python 3.13 environment:
@@ -123,12 +130,12 @@ This builds a local native Linux wheel. It is CPU-specific (`-march=native`); bu
 
 ## Reproduce the published workloads
 
-The source checkout contains the two published circuits, recorded sampling seeds, input hashes and compact result evidence. Full sampled syndrome/truth arrays are not distributed. The runner regenerates inputs from each circuit with seed 202610100 (BB) or 202610101 (Color), including 64 held-out warmup shots. The graph exporter does **no reference decoding**.
-
-Use the same input directory across implementations to compare a shared regenerated sample. Sampling can vary with software versions, so a fresh reproduction is not guaranteed to match the historical input bytes, error counts or timings exactly.
+The included BB and Color circuits can be run with all three implementations.
+The runner generates and reuses inputs automatically; bulk sampled data are not
+included in the repository.
 
 ```bash
-# Run all six experiments sequentially; this explicitly starts long decoding jobs.
+# Run all six experiments sequentially.
 for family in bb color; do
   for mode in gpu original optimized; do
     python benchmarks/scripts/run_decoder.py --family "$family" --mode "$mode" \
@@ -137,7 +144,10 @@ for family in bb color; do
 done
 ```
 
-The published circuits and fixed p=0.001 are reused directly; circuit generation and error-rate selection are not needed. Each backend retains state across 1,000-shot blocks; completed blocks can be resumed using the same output directory. Performance depends on hardware, drivers and host/worker placement.
+Add `--gpu-profile legacy` to a GPU command to use the published configuration.
+
+Interrupted runs can be resumed using the same output directory. Experiment details
+are available in the [benchmark protocol](docs/BENCHMARK.md).
 
 Audit the existing evidence or redraw the figure **without decoding**:
 
@@ -155,10 +165,10 @@ python benchmarks/scripts/plot_results.py
 - `benchmarks/scripts/`: build, run, verify and plot entry points.
 - `benchmarks/circuits/`: the BB and Color circuits used in the published runs.
 - `benchmarks/results/2026-10/`: summaries, compact block timings and per-shot outcome arrays.
-- `benchmarks/inputs/`: historical input hashes, seeds and metadata; no bulk arrays.
+- `benchmarks/inputs/`: input manifests and metadata.
 - `docs/`: benchmark protocol and README figure.
 
-Historical optimization experiments, unused kernel variants, the upstream circuit collection, tutorials and example logs are omitted. Build artifacts and regenerated bulk inputs are ignored by Git.
+Build artifacts and generated inputs are ignored by Git.
 
 ## License and attribution
 

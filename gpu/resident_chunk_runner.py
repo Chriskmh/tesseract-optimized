@@ -14,6 +14,7 @@ order.  ``ExactGpuBackend`` owns strict status validation and CPU replay.
 from __future__ import annotations
 
 import copy
+import math
 import time
 from collections import Counter
 from dataclasses import dataclass
@@ -256,8 +257,12 @@ class ResidentChunkedDecoder:
         chunk_size: int,
         detection_capacity: int | None = None,
         device_buffers: Mapping[str, Any] | None = None,
+        pause_ms: float = 0.0,
     ):
         self.model = model
+        self.pause_ms = float(pause_ms)
+        if not math.isfinite(self.pause_ms) or self.pause_ms < 0:
+            raise ValueError("pause_ms must be finite and nonnegative")
         self.source_shots, self.words = _validate_source_shots(model)
         self.chunk_size = int(chunk_size)
         if self.chunk_size < 1:
@@ -356,10 +361,15 @@ class ResidentChunkedDecoder:
         failed_shots: list[int] = []
         total_kernel_ms = 0.0
         total_upload_ms = 0.0
+        cooperative_wait_ms = 0.0
         status_counts: Counter[int] = Counter()
         for chunk_index, source_start in enumerate(
             range(0, self.source_shots, self.chunk_size)
         ):
+            if chunk_index and self.pause_ms:
+                pause_start = time.perf_counter()
+                time.sleep(self.pause_ms / 1000.0)
+                cooperative_wait_ms += (time.perf_counter() - pause_start) * 1000.0
             chunk: ChunkInput | None = None
             upload_ms = 0.0
             try:
@@ -452,6 +462,7 @@ class ResidentChunkedDecoder:
         return decisions, {
             "kernel_ms": total_kernel_ms,
             "upload_ms": total_upload_ms,
+            "cooperative_wait_ms": cooperative_wait_ms,
             "status_counts": dict(sorted(status_counts.items())),
             "chunk_size": self.chunk_size,
             "detection_capacity": self.detection_capacity,

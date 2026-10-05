@@ -15,6 +15,7 @@ or approximate result.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from contextlib import nullcontext
 from typing import Any, Callable, Mapping, Protocol, Sequence
 
 import numpy as np
@@ -29,6 +30,7 @@ from speculative_replay_scheduler import (
     _validate_cpu_decision,
 )
 from resident_chunk_runner import ResidentChunkedDecoder, max_chunk_detections
+from resource_policy import DeviceInfo, GpuResources, resolve_resources
 
 
 MIB = 1 << 20
@@ -204,6 +206,7 @@ class WorkspacePlan:
     memory_info_error: str | None
     source: str
     workspace_layout: str = WORKSPACE_LAYOUT_LEGACY
+    resource_policy: dict | None = None
 
 
 def inspect_model(model: Any) -> ModelFeatures:
@@ -463,6 +466,8 @@ def plan_workspace(
     reserve_bytes: int = DEFAULT_MEMORY_RESERVE_BYTES,
     memory_fraction: float = DEFAULT_MEMORY_FRACTION,
     workspace_layout: str = WORKSPACE_LAYOUT_LEGACY,
+    resources: GpuResources | None = None,
+    device_info: DeviceInfo | Callable[[], DeviceInfo] | None = None,
 ) -> WorkspacePlan:
     """Choose an arena first, then a resident chunk fitting free memory.
 
@@ -471,6 +476,8 @@ def plan_workspace(
     streams an arbitrary source batch through that fixed allocation.
     """
     defaults = BACKEND_DEFAULTS[selection.backend]
+    resources = resources if resources is not None else GpuResources()
+    policy = resolve_resources(resources, defaults.preferred_chunk_size, device_info=device_info)
     cta_threads = int(
         defaults.cta_threads if cta_threads_override is None
         else cta_threads_override
@@ -508,7 +515,7 @@ def plan_workspace(
     source_shots = int(selection.features.shots)
     if chunk_size_override is None:
         desired_chunk_size = min(
-            max(1, source_shots), defaults.preferred_chunk_size
+            max(1, source_shots), policy["preferred_chunk_size"]
         )
     else:
         desired_chunk_size = int(chunk_size_override)
@@ -516,16 +523,32 @@ def plan_workspace(
             raise ValueError("chunk_size_override must be positive")
         if desired_chunk_size > np.iinfo(np.int32).max:
             raise ValueError("chunk_size_override exceeds the kernel int32 ABI")
+        if resources.max_chunk_size is not None and desired_chunk_size > resources.max_chunk_size:
+            raise ValueError("chunk_size_override exceeds the resource max_chunk_size")
 
     info, info_error = _read_memory_info(memory_info)
     free = info[0] if info else None
     total = info[1] if info else None
     usable = None
+    if info is None and resources.limits_memory:
+        raise MemoryError("cannot admit a bounded/shared GPU allocation without current memory information")
     if free is not None:
         usable = max(
             0,
             min(free - int(reserve_bytes), int(free * memory_fraction)),
         )
+        if resources.effective_memory_share is not None:
+            usable = min(usable, int(total * resources.effective_memory_share))
+        if resources.memory_limit_bytes is not None:
+            usable = min(usable, resources.memory_limit_bytes)
+    admission_budget = usable
+    if resources.limits_memory and usable is not None:
+        # Actual pool usage can exceed the graph/workspace layout estimate
+        # (e.g. wide CSR conversions and cached allocation rounding). Keep
+        # that slack inside the requested ceiling; do not alter legacy paths.
+        headroom = min(usable, max(16 * MIB, usable // 10))
+        admission_budget = usable - headroom
+        policy["array_pool_headroom_bytes"] = headroom
     graph_bytes = estimate_graph_bytes(model)
     if workspace_override is not None:
         candidates = (int(workspace_override),)
@@ -586,7 +609,7 @@ def plan_workspace(
             )
             estimate = graph_bytes + chunk_bytes[chunk_size] + workspace_bytes
             smallest_estimate = estimate
-            if usable is None or estimate <= usable:
+            if admission_budget is None or estimate <= admission_budget:
                 return WorkspacePlan(
                     backend=selection.backend,
                     workspace_capacity=capacity,
@@ -606,6 +629,7 @@ def plan_workspace(
                     memory_info_error=info_error,
                     source=source,
                     workspace_layout=workspace_layout,
+                    resource_policy=policy,
                 )
         rejected.append((int(capacity), chunk_sizes[-1], smallest_estimate))
     raise MemoryError(
@@ -748,6 +772,8 @@ class ExactGpuBackend:
         memory_fraction: float = DEFAULT_MEMORY_FRACTION,
         decoder_class: DecoderFactory | None = None,
         decoder_classes: Mapping[str, DecoderFactory] | None = None,
+        resources: GpuResources | None = None,
+        device_info: DeviceInfo | Callable[[], DeviceInfo] | None = None,
     ):
         self.model = model
         self.cpu_exact_callback = cpu_exact_callback
@@ -757,6 +783,8 @@ class ExactGpuBackend:
         self.runner: ResidentChunkedDecoder | None = None
         self.backend_error: str | None = None
         self._decode_calls = 0
+        self.resources = resources if resources is not None else GpuResources()
+        self.allocation_pool = None
 
         # Injected factories can allocate different arrays.  Apply the tighter
         # bound only to the validated default implementation; their planning
@@ -786,6 +814,8 @@ class ExactGpuBackend:
                 reserve_bytes=reserve_bytes,
                 memory_fraction=memory_fraction,
                 workspace_layout=workspace_layout,
+                resources=self.resources,
+                device_info=device_info,
             )
         except MemoryError as exc:
             # An insufficient conservative budget is a runtime availability
@@ -794,6 +824,12 @@ class ExactGpuBackend:
             return
 
         try:
+            if self.resources.limits_memory:
+                # Bound only this backend's array pool. Never change the global
+                # CuPy allocator, another process, or driver-level provisioning.
+                import cupy as cp
+                self.allocation_pool = cp.cuda.MemoryPool()
+                self.allocation_pool.set_limit(size=self.plan.usable_bytes)
             factory = decoder_class
             if factory is None and decoder_classes is not None:
                 factory = decoder_classes.get(self.selection.backend)
@@ -803,19 +839,27 @@ class ExactGpuBackend:
                     cta_threads=self.plan.cta_threads,
                     heap_cache=self.plan.heap_cache,
                 )
-            self.runner = ResidentChunkedDecoder(
-                model,
-                factory,
-                _decoder_kwargs(self.plan),
-                chunk_size=self.plan.chunk_size,
-                detection_capacity=self.plan.detection_capacity,
-            )
+            with self._allocation_context():
+                self.runner = ResidentChunkedDecoder(
+                    model,
+                    factory,
+                    _decoder_kwargs(self.plan),
+                    chunk_size=self.plan.chunk_size,
+                    detection_capacity=self.plan.detection_capacity,
+                    pause_ms=self.resources.effective_pause_ms,
+                )
             # Public compatibility handle for launch configuration, workspace
             # inspection, and existing callers.  Decode orchestration belongs
             # to the resident runner.
             self.decoder = self.runner.decoder
         except Exception as exc:
             self.backend_error = _format_error(exc)
+
+    def _allocation_context(self):
+        if self.allocation_pool is None:
+            return nullcontext()
+        import cupy as cp
+        return cp.cuda.using_allocator(self.allocation_pool.malloc)
 
     @property
     def resident(self) -> bool:
@@ -843,7 +887,8 @@ class ExactGpuBackend:
         backend_failed_shots: set[int] = set()
         if self.runner is not None:
             try:
-                result = self.runner.decode()
+                with self._allocation_context():
+                    result = self.runner.decode()
                 if not isinstance(result, tuple) or len(result) != 2:
                     raise TypeError("GPU decoder must return (decisions, stats)")
                 candidate_decisions, candidate_stats = result
@@ -934,6 +979,9 @@ class ExactGpuBackend:
             "decode_call": self._decode_calls,
             "gpu_backend_error": call_error,
             "gpu_stats": gpu_stats,
+            "array_pool_limit_bytes": (
+                self.plan.usable_bytes if self.allocation_pool is not None else None
+            ),
             "routes": routes,
             "gpu_accepted_shots": [
                 shot for shot in range(shots) if shot not in fallback_set
@@ -953,6 +1001,7 @@ __all__ = [
     "BackendSelection",
     "ExactFallbackRequiredError",
     "ExactGpuBackend",
+    "GpuResources",
     "ModelFeatures",
     "WorkspacePlan",
     "WORKSPACE_LAYOUT_BB_SINGLEHASH_COMPACT",

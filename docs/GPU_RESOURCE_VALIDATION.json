@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-05",
+  "baseline_commit": "d675b56f41ca21e28a2163606d85ba855598df52",
+  "device": {
+    "device_id": 0,
+    "name": "NVIDIA GeForce GTX 1660 Ti with Max-Q Design",
+    "sm_count": 24,
+    "compute_major": 7,
+    "compute_minor": 5
+  },
+  "cpu_sources_unchanged": true,
+  "cuda_kernel_source_modules_unchanged": true,
+  "historical_50000_shot_evidence_unchanged": true,
+  "original_worker_sha256": "691600fcacd12212839d48a50f007506e2ba09f2f77295ec5371b0f87cc54a7a",
+  "host_tests_passed": 15,
+  "input_selection": "Historical p=0.001 inputs, source shots [64,192), no resampling",
+  "timing_protocol": "128 shots per family; 8-shot warmup per instance; interleaved baseline/auto/auto/baseline; setup excluded",
+  "complete_output_fields": [
+    "low_confidence",
+    "predicted_errors_populated",
+    "total_cost_bits",
+    "predicted_errors",
+    "predictions"
+  ],
+  "cached_cpu_answers_used_for_timing": false,
+  "large_gpu_performance_validated": false,
+  "limitation": "Short regression probe, not a new 50000-shot campaign; Color resident chunk is capped to its 128-shot source sample.",
+  "post_probe_change": "Bounded allocation admission now includes extra headroom; host checks pass and the tested 512 MiB shared configurations still admit 12 shots.",
+  "families": {
+    "bb": {
+      "shots": 128,
+      "workspace_capacity": 100000,
+      "resident_chunk": 64,
+      "cta_threads": 640,
+      "heap_cache": 1024,
+      "baseline_seconds": [
+        9.003739699997823,
+        9.020997699997679
+      ],
+      "auto_seconds": [
+        9.005359900002077,
+        9.020335500004876
+      ],
+      "baseline_mean_seconds": 9.01236869999775,
+      "auto_mean_seconds": 9.012847700003476,
+      "auto_runtime_change_percent": 0.005314917994048152,
+      "full_output_mismatches": 0,
+      "timing_cpu_fallbacks": 0,
+      "shared": {
+        "resident_chunk": 12,
+        "array_pool_limit_bytes": 536870912,
+        "observed_array_pool_bytes": 154365952,
+        "full_output_mismatches": 0,
+        "cpu_fallbacks": 0
+      }
+    },
+    "color": {
+      "shots": 128,
+      "workspace_capacity": 100000,
+      "resident_chunk": 128,
+      "cta_threads": 256,
+      "heap_cache": 128,
+      "baseline_seconds": [
+        9.89748469999904,
+        9.958782699999574
+      ],
+      "auto_seconds": [
+        9.879935999997542,
+        9.990624700003536
+      ],
+      "baseline_mean_seconds": 9.928133699999307,
+      "auto_mean_seconds": 9.93528035000054,
+      "auto_runtime_change_percent": 0.071983821100563,
+      "full_output_mismatches": 0,
+      "timing_cpu_fallbacks": 0,
+      "shared": {
+        "resident_chunk": 12,
+        "array_pool_limit_bytes": 536870912,
+        "observed_array_pool_bytes": 204527104,
+        "full_output_mismatches": 0,
+        "cpu_fallbacks": 0
+      }
+    }
+  }
+}

@@ -106,7 +106,7 @@ def gpu_block(backend, model, worker, start, stop):
     if stats['gpu_backend_error']: raise RuntimeError('GPU backend failed: '+stats['gpu_backend_error'])
     return result, stats
 
-def make_backend(model):
+def make_backend(model, gpu_options=None):
     import exact_gpu_backend as dispatch
     aligned_capacity=dispatch.max_chunk_detections
     def any_origin_capacity(source,chunk_size):
@@ -125,8 +125,9 @@ def make_backend(model):
         if width>255:
             from cta_compact_wide_decoder import ExactCtaDecoder
             return dispatch.ExactGpuBackend(model,backend_override='final',decoder_class=ExactCtaDecoder,
-                                           cta_threads_override=256,heap_cache_override=128)
-        return dispatch.ExactGpuBackend(model)
+                                           cta_threads_override=256,heap_cache_override=128,
+                                           **(gpu_options or {}))
+        return dispatch.ExactGpuBackend(model, **(gpu_options or {}))
     finally:
         dispatch.max_chunk_detections=aligned_capacity
 
@@ -163,8 +164,24 @@ def paired_comparison(base_dir, candidate_dir):
                 discordant_failures=plus+minus,margin=margin,
                 equivalent=bool(margin>0 and interval[0]>=-margin and interval[1]<=margin))
 
-def experiment(mode, circuit, model_path, budget, directory, shots, formal=False):
+def experiment(mode, circuit, model_path, budget, directory, shots, formal=False, *, gpu_options=None):
     directory.mkdir(parents=True, exist_ok=True)
+    gpu_configuration = None
+    if mode == 'gpu':
+        from resource_policy import GpuResources, cuda_device_info
+        options = gpu_options or {}
+        gpu_configuration = dict(
+            resources=dataclasses.asdict(options.get('resources', GpuResources())),
+            reserve_bytes=options.get('reserve_bytes', 512 * (1 << 20)),
+            memory_fraction=options.get('memory_fraction', 0.75),
+            device=dataclasses.asdict(cuda_device_info()))
+        setup_path = directory/'setup.json'
+        if setup_path.exists():
+            previous = json.loads(setup_path.read_text()).get('gpu_configuration')
+            if previous is not None and previous != gpu_configuration:
+                raise RuntimeError('GPU configuration/device changed; use a new output directory')
+            if previous is None and gpu_options:
+                raise RuntimeError('Old run has no resource configuration; use a new output directory')
     if (directory/'summary.json').exists(): return json.loads((directory/'summary.json').read_text())
     verify_inputs(model_path)
     ready_start = time.perf_counter()
@@ -178,14 +195,16 @@ def experiment(mode, circuit, model_path, budget, directory, shots, formal=False
         if mode=='gpu':
             from gpu_decoder import HostModel
             model = HostModel.load(model_path)
-            backend = make_backend(model)
+            backend = make_backend(model, gpu_options)
             if backend.runner is None or backend.backend_error: raise RuntimeError(f'GPU initialization failed: {backend.backend_error}')
             gpu_plan = dataclasses.asdict(backend.plan)
             gpu_plan['implementation_module']=type(backend.decoder).__module__
             gpu_block(backend, model, worker, 0, 64)
         else: worker.decode(range(64))
-        atomic(directory/'setup.json', dict(wall_seconds=time.perf_counter()-ready_start, cpu=worker.ready, gpu_plan=gpu_plan,
-                                           warmup_shots=64, budget=budget, beam=5, mode=mode))
+        setup_record = dict(wall_seconds=time.perf_counter()-ready_start, cpu=worker.ready,
+                            gpu_plan=gpu_plan, warmup_shots=64, budget=budget, beam=5, mode=mode)
+        if mode == 'gpu': setup_record['gpu_configuration'] = gpu_configuration
+        atomic(directory/'setup.json', setup_record)
         block_size = 1000 if formal else 100
         for block, begin in enumerate(range(64, shots+64, block_size)):
             path=directory/f'block_{block:05d}.json'
