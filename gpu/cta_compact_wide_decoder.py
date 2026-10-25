@@ -1223,6 +1223,9 @@ def _next_power_of_two(value: int) -> int:
 
 
 class ExactCtaDecoder:
+    common_source = COMMON
+    kernel_source = CTA_KERNEL
+
     def __init__(self, model: HostModel, workspace_capacity: int = 8192,
                  max_output: int = 1024, max_registers: int = 0,
                  cta_threads: int = 128, heap_cache: int = 128):
@@ -1247,7 +1250,7 @@ class ExactCtaDecoder:
                 "row-relative prefix positions require every d2e row "
                 "to contain fewer than 65535 errors; maximum is "
                 f"{max_row_length}")
-        if not np.array_equal(
+        if not getattr(self, "supports_detector_orders", False) and not np.array_equal(
             model.detector_order,
             np.arange(len(model.detector_order), dtype=np.uint32),
         ):
@@ -1265,7 +1268,7 @@ class ExactCtaDecoder:
             + ("1" if model.rank_rows_monotonic else "0")
         )
         self.module = cp.RawModule(
-            code=COMMON + CTA_KERNEL,
+            code=self.common_source + self.kernel_source,
             options=tuple(options),
             name_expressions=("decode_exact_cta",),
             backend="nvrtc",

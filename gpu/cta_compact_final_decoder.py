@@ -275,7 +275,7 @@ class ExactCtaDecoder(prefixfold.ExactCtaDecoder):
         self.max_error_degree, self.max_row_length = (
             base._validate_fused_state_model(model)  # pylint: disable=protected-access
         )
-        if not np.array_equal(
+        if not getattr(self, "supports_detector_orders", False) and not np.array_equal(
             model.detector_order,
             np.arange(len(model.detector_order), dtype=np.uint32),
         ):

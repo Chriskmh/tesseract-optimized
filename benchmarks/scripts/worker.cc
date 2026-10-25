@@ -24,13 +24,20 @@ template<class T> std::vector<T> read(const std::string& p) {
 }
 int main(int argc,char** argv) {
   try {
-    if(argc!=5) throw std::runtime_error("usage: worker circuit model beam budget");
+    if(argc!=5 && argc!=6) throw std::runtime_error("usage: worker circuit model beam budget [paper_short]");
     auto setup=std::chrono::steady_clock::now();
     FILE* f=fopen(argv[1],"r"); if(!f) throw std::runtime_error("missing circuit");
     auto circuit=stim::Circuit::from_file(f); fclose(f);
     auto dem=stim::ErrorAnalyzer::circuit_to_detector_error_model(circuit,false,true,true,1,false,false);
     tesseract_decoder::TesseractConfig config{dem};
     config.det_beam=std::stoi(argv[3]); config.pqlimit=std::stoull(argv[4]);
+    if(argc==6) {
+      if(std::string(argv[5])!="paper_short" || config.det_beam!=15 || config.pqlimit!=200000)
+        throw std::invalid_argument("paper_short requires beam 15 and pqlimit 200000");
+      config.beam_climbing=true;
+      config.detector_orders=tesseract_decoder::make_detector_orders(
+        16,tesseract_decoder::DetectorOrder::Method::Coordinate,173301);
+    }
     tesseract_decoder::TesseractDecoder decoder(config);
 #ifdef FINAL_PRODUCTION
     tesseract_decoder::batch_detail::BatchPlanState plan(&decoder);
@@ -39,7 +46,11 @@ int main(int argc,char** argv) {
     auto offsets=read<uint64_t>(dir+"/shot_offsets.u64");
     auto detections=read<uint32_t>(dir+"/shot_detections.u32");
     if(offsets.empty() || offsets.front()!=0 || offsets.back()!=detections.size()) throw std::runtime_error("invalid shot CSR");
-    std::cout<<nlohmann::json({{"ready",true},{"setup_seconds",std::chrono::duration<double>(std::chrono::steady_clock::now()-setup).count()}}).dump()<<std::endl;
+    nlohmann::json resolved_orders=nlohmann::json::array();
+    for(const auto& order:decoder.config.detector_orders) resolved_orders.push_back(order.get_order());
+    std::cout<<nlohmann::json({{"ready",true},{"beam",config.det_beam},{"pqlimit",config.pqlimit},
+      {"beam_climbing",config.beam_climbing},{"detector_orders",resolved_orders},
+      {"setup_seconds",std::chrono::duration<double>(std::chrono::steady_clock::now()-setup).count()}}).dump()<<std::endl;
     std::string line;
     while(std::getline(std::cin,line)) {
       auto command=nlohmann::json::parse(line);
@@ -58,7 +69,20 @@ int main(int argc,char** argv) {
 #ifdef FINAL_PRODUCTION
         tesseract_decoder::batch_detail::BatchPlanActivation activation(plan);
 #endif
-        for(auto& hit:hits) results.push_back(decoder.decode_result(hit));
+        for(auto& hit:hits) {
+          if(command.contains("trial")) {
+            int trial=command.at("trial").get<int>();
+            if(argc!=6 || trial<0 || trial>=16) throw std::invalid_argument("invalid Short trial");
+            decoder.decode_to_errors(hit,trial,trial);
+            tesseract_decoder::DecodeResult r;
+            r.predicted_errors=decoder.predicted_errors_buffer;
+            r.predictions=decoder.get_flipped_observables(r.predicted_errors);
+            r.total_cost=decoder.cost_from_errors(r.predicted_errors);
+            r.predicted_errors_populated=true;
+            r.low_confidence=decoder.low_confidence_flag;
+            results.push_back(std::move(r));
+          } else results.push_back(decoder.decode_result(hit));
+        }
       }
       double seconds=std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count();
       for(auto& r:results) {

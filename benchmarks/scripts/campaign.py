@@ -45,9 +45,12 @@ def wsl_command(binary, args):
             'taskset', '-c', '0', linux(HERE / 'bin' / binary), *args]
 
 class Worker:
-    def __init__(self, mode, circuit, model, budget, log):
+    def __init__(self, mode, circuit, model, budget, log, decoder_profile='published'):
         self.log = open(log, 'ab')
-        self.p = subprocess.Popen(wsl_command(mode + '_worker', [linux(circuit), linux(model), '5', str(budget)]),
+        if decoder_profile not in ('published','paper_short'): raise ValueError('unknown decoder profile')
+        argv=[linux(circuit),linux(model),'15' if decoder_profile=='paper_short' else '5',str(budget)]
+        if decoder_profile=='paper_short': argv.append('paper_short')
+        self.p = subprocess.Popen(wsl_command(mode + '_worker', argv),
                                   stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.log)
         self.ready = self.receive()
         if not self.ready.get('ready'): raise RuntimeError('CPU worker not ready')
@@ -55,8 +58,10 @@ class Worker:
         line = self.p.stdout.readline()
         if not line: raise RuntimeError(f'CPU worker exited {self.p.poll()}; inspect worker log')
         return json.loads(line)
-    def decode(self, indices, full=False):
-        self.p.stdin.write((json.dumps(dict(indices=list(indices), full=full))+'\n').encode()); self.p.stdin.flush()
+    def decode(self, indices, full=False, trial=None):
+        command=dict(indices=list(indices),full=full)
+        if trial is not None: command['trial']=int(trial)
+        self.p.stdin.write((json.dumps(command)+'\n').encode()); self.p.stdin.flush()
         return self.receive()
     def close(self):
         try:
@@ -66,16 +71,21 @@ class Worker:
             if self.p.poll() is None: self.p.kill(); self.p.wait()
             self.log.close()
 
-def export(circuit, shots, seed, budget, path):
+def export(circuit, shots, seed, budget, path, decoder_profile='published'):
     path.mkdir(parents=True, exist_ok=True)
-    identity = dict(circuit_sha256=sha(circuit), shots=shots+64, seed=seed, beam=5, budget=budget,
+    if decoder_profile not in ('published','paper_short'): raise ValueError('unknown decoder profile')
+    beam=15 if decoder_profile=='paper_short' else 5
+    identity = dict(circuit_sha256=sha(circuit), shots=shots+64, seed=seed, beam=beam, budget=budget,
                     exporter_sha256=sha(HERE/'bin/input_export'))
+    if decoder_profile=='paper_short': identity['decoder_profile']=decoder_profile
     marker = path / 'input_identity.json'
     if marker.exists():
         if json.loads(marker.read_text()) != identity: raise RuntimeError('input identity changed')
         return
     with open(path / 'export.log', 'ab') as log:
-        subprocess.run(wsl_command('input_export', [linux(circuit), str(shots+64), str(seed), '5', str(budget), linux(path)]),
+        argv=[linux(circuit),str(shots+64),str(seed),str(beam),str(budget),linux(path)]
+        if decoder_profile=='paper_short': argv.append('paper_short')
+        subprocess.run(wsl_command('input_export', argv),
                        stdout=log, stderr=log, check=True)
     files = {f.name: sha(f) for f in path.iterdir() if f.suffix in ('.u64', '.u32', '.f64')}
     atomic(path / 'input_hashes.json', files)

@@ -63,7 +63,7 @@ The complete Python-hosted CUDA source is in [gpu/](gpu/). Kernels are compiled 
 
 These changes add a further 1.75–1.92× throughput improvement over the optimized CPU on the tested GTX 1660 Ti, bringing the total speedup over the archived original CPU to 5.01–5.83×. The gain depends on the code, shot workload and hardware.
 
-The runner selects a compatible GPU backend for each workload. The GPU interface supports one-order models and retains exact CPU replay when needed.
+The runner selects a compatible GPU backend for each workload. The GPU interface supports one-order models and the complete [paper Short profile](docs/SHORT.md), with exact CPU replay when needed. Short uses its own benchmark entry point; the results above use beam 5.
 
 ## Install
 

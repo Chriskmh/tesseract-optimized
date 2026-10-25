@@ -171,8 +171,8 @@ void write_json(const std::filesystem::path& path, const nlohmann::json& value) 
 }  // namespace
 
 int main(int argc, char** argv) {
-  if (argc != 7) {
-    std::cerr << "usage: export_model circuit shots seed beam pqlimit output_dir\n";
+  if (argc != 7 && argc != 8) {
+    std::cerr << "usage: export_model circuit shots seed beam pqlimit output_dir [paper_short]\n";
     return 2;
   }
 
@@ -194,7 +194,19 @@ int main(int argc, char** argv) {
   tesseract_decoder::TesseractConfig config{dem};
   config.det_beam = static_cast<int>(beam);
   config.pqlimit = pqlimit;
+  const bool short_profile = argc == 8;
+  if (short_profile) {
+    if (std::string(argv[7]) != "paper_short" || beam != 15 || pqlimit != 200000)
+      throw std::invalid_argument("paper_short requires beam 15 and pqlimit 200000");
+    config.detector_orders = tesseract_decoder::make_detector_orders(
+        16, tesseract_decoder::DetectorOrder::Method::Coordinate, 173301);
+  }
   tesseract_decoder::TesseractDecoder decoder(config);
+  if (short_profile) {
+    nlohmann::json orders = nlohmann::json::array();
+    for (const auto& order : decoder.config.detector_orders) orders.push_back(order.get_order());
+    write_json(output_dir / "detector_orders.json", orders);
+  }
 
   std::vector<double> weights;
   std::vector<uint32_t> error_to_dem;
@@ -421,7 +433,7 @@ int main(int argc, char** argv) {
       {"circuit", circuit_path.generic_string()},
       {"shots", shots.size()},
       {"seed", seed},
-      {"beam", beam},
+      {"beam", short_profile ? 0 : beam},
       {"pqlimit", pqlimit},
       {"num_detectors", decoder.num_detectors},
       {"num_errors", decoder.num_errors},
@@ -432,7 +444,9 @@ int main(int argc, char** argv) {
       {"det_penalty", decoder.config.det_penalty},
       {"no_revisit_dets", decoder.config.no_revisit_dets},
       {"merge_errors", decoder.config.merge_errors},
-      {"detector_orders", decoder.config.detector_orders.size()},
+      {"detector_orders", 1},
+      {"profile", short_profile ? "paper_short" : "single"},
+      {"ensemble_orders", decoder.config.detector_orders.size()},
       {"rank_safe", rank_safe},
       {"rank_stride", rank_stride},
       {"rank_groups", group_weights.size()},
